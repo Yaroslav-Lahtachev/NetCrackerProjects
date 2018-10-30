@@ -1,8 +1,11 @@
+import java.util.Objects;
+
 public class Rectangle {
     private float length = 1.0f;
     private float width = 1.0f;
 
-    public Rectangle() {}
+    public Rectangle() {
+    }
 
     public Rectangle(float length, float width) {
         this.length = length;
@@ -25,11 +28,11 @@ public class Rectangle {
         this.width = width;
     }
 
-    public double getArea(){
+    public double getArea() {
         return length * width;
     }
 
-    public double getPerimeter(){
+    public double getPerimeter() {
         return 2 * (length + width);
     }
 
@@ -39,5 +42,19 @@ public class Rectangle {
                 "length=" + length +
                 ", width=" + width +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Rectangle)) return false;
+        Rectangle rectangle = (Rectangle) o;
+        return Float.compare(rectangle.getLength(), getLength()) == 0 &&
+                Float.compare(rectangle.getWidth(), getWidth()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getLength(), getWidth());
     }
 }

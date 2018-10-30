@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Book {
 
@@ -55,12 +56,29 @@ public class Book {
                 '}';
     }
 
-    public String getAuthorNames(){
+    public String getAuthorNames() {
         String tmp = authors[0].getName();
-        for(int i = 1; i < authors.length; i++){
-            tmp +=", " + authors[i].getName();
+        for (int i = 1; i < authors.length; i++) {
+            tmp += ", " + authors[i].getName();
         }
         return tmp;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return Double.compare(book.getPrice(), getPrice()) == 0 &&
+                getQty() == book.getQty() &&
+                Objects.equals(getName(), book.getName()) &&
+                Arrays.equals(authors, book.authors);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(getName(), getPrice(), getQty());
+        result = 31 * result + Arrays.hashCode(authors);
+        return result;
+    }
 }

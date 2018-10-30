@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Ball {
     private float x;
     private float y;
@@ -5,12 +7,12 @@ public class Ball {
     private float xDelta;
     private float yDelta;
 
-    public Ball(float x, float y, int radius , int speed, int direction) {
+    public Ball(float x, float y, int radius, int speed, int direction) {
         this.x = x;
         this.y = y;
         this.radius = radius;
-        this.xDelta = (float)( speed * Math.cos(direction));
-        this.yDelta = (float)( -speed * Math.sin(direction));
+        this.xDelta = (float) (speed * Math.cos(direction));
+        this.yDelta = (float) (-speed * Math.sin(direction));
     }
 
     public float getX() {
@@ -53,7 +55,7 @@ public class Ball {
         this.yDelta = yDelta;
     }
 
-    public void move(){
+    public void move() {
         this.x += xDelta;
         this.y += yDelta;
     }
@@ -69,6 +71,23 @@ public class Ball {
     @Override
     public String toString() {
         return "Ball{" +
-                "(" + x +"," + y + ", speed=(" + xDelta +"," + yDelta +")" + '}';
+                "(" + x + "," + y + ", speed=(" + xDelta + "," + yDelta + ")" + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ball)) return false;
+        Ball ball = (Ball) o;
+        return Float.compare(ball.getX(), getX()) == 0 &&
+                Float.compare(ball.getY(), getY()) == 0 &&
+                getRadius() == ball.getRadius() &&
+                Float.compare(ball.getxDelta(), getxDelta()) == 0 &&
+                Float.compare(ball.getyDelta(), getyDelta()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getX(), getY(), getRadius(), getxDelta(), getyDelta());
     }
 }

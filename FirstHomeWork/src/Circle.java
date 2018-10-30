@@ -1,18 +1,20 @@
 import java.lang.*;
+import java.util.Objects;
 
 public class Circle {
-    private double radius=1.0;
-    private String color="red";
+    private double radius = 1.0;
+    private String color = "red";
 
-    public Circle(){}
-
-    public Circle(double radius){
-        this.radius=radius;
+    public Circle() {
     }
 
-    public Circle(double radius, String color){
-        this.radius=radius;
-        this.color=color;
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public Circle(double radius, String color) {
+        this.radius = radius;
+        this.color = color;
     }
 
     public double getRadius() {
@@ -39,7 +41,21 @@ public class Circle {
                 '}';
     }
 
-    public double getArea(){
+    public double getArea() {
         return Math.PI * Math.pow(radius, 2);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Circle)) return false;
+        Circle circle = (Circle) o;
+        return Double.compare(circle.getRadius(), getRadius()) == 0 &&
+                Objects.equals(getColor(), circle.getColor());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRadius(), getColor());
     }
 }

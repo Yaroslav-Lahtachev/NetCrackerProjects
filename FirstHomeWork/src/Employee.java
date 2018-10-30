@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Employee {
 
     private int id;
@@ -24,7 +26,7 @@ public class Employee {
         return lastName;
     }
 
-    public String getName(){
+    public String getName() {
         return firstName + " " + lastName;
     }
 
@@ -36,12 +38,12 @@ public class Employee {
         this.salary = salary;
     }
 
-    public int getAnnualSalary(){
+    public int getAnnualSalary() {
         return salary * 12;
     }
 
-    public int raiseSalary(int percent){
-        salary*=(100 + percent)/100;
+    public int raiseSalary(int percent) {
+        salary *= (100 + percent) / 100;
         return salary;
     }
 
@@ -52,5 +54,21 @@ public class Employee {
                 ", Name=" + firstName + " " + lastName + '\'' +
                 ", salary=" + salary +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee employee = (Employee) o;
+        return getId() == employee.getId() &&
+                getSalary() == employee.getSalary() &&
+                Objects.equals(getFirstName(), employee.getFirstName()) &&
+                Objects.equals(getLastName(), employee.getLastName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFirstName(), getLastName(), getSalary());
     }
 }
