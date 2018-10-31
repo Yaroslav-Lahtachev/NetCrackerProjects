@@ -66,11 +66,14 @@ public class MyPolynomial {
         if (this == o) return true;
         if (!(o instanceof MyPolynomial)) return false;
         MyPolynomial that = (MyPolynomial) o;
-        return Arrays.equals(coeffs, that.coeffs);
+        return Arrays.equals(that.coeffs, coeffs);
+
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(coeffs);
+        int result = 17;
+        result = 31 * result + coeffs.hashCode();
+        return result;
     }
 }

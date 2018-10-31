@@ -20,6 +20,13 @@ public class Main {
         System.out.println(b2.toString() + " <--положение мяча 2 после перемещения");
         System.out.println(c1.collides(b2) + " помещается ли после начала перемещения");
 
+        MyPolynomial p1 = new MyPolynomial(1,2,3,45,5);
+        MyPolynomial p2 = new MyPolynomial(1,2,3,45,5);
+        MyPolynomial p3 = p2;
+        System.out.println(p1.equals(p2));
+        System.out.println(p2.hashCode());
+        System.out.println(p2.toString());
+        System.out.println(p1.toString());
 
 
     }

@@ -1,6 +1,3 @@
-import java.math.RoundingMode;
-import java.math.BigDecimal;
-import java.util.Objects;
 
 public class MyPoint {
     private double x = 0;
@@ -62,12 +59,14 @@ public class MyPoint {
         if (this == o) return true;
         if (!(o instanceof MyPoint)) return false;
         MyPoint myPoint = (MyPoint) o;
-        return Double.compare(myPoint.getX(), getX()) == 0 &&
-                Double.compare(myPoint.getY(), getY()) == 0;
+        return myPoint.x == x && myPoint.y == y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getX(), getY());
+        int result = 17;
+        result = 31 * result + (int) (Double.doubleToLongBits(x) ^ (Double.doubleToLongBits(x) >>> 32));
+        result = 31 * result + (int) (Double.doubleToLongBits(y) ^ (Double.doubleToLongBits(y) >>> 32));
+        return result;
     }
 }

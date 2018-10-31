@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Objects;
 
 public class Book {
 
@@ -69,16 +68,16 @@ public class Book {
         if (this == o) return true;
         if (!(o instanceof Book)) return false;
         Book book = (Book) o;
-        return Double.compare(book.getPrice(), getPrice()) == 0 &&
-                getQty() == book.getQty() &&
-                Objects.equals(getName(), book.getName()) &&
-                Arrays.equals(authors, book.authors);
+        return book.name.equals(name) && Arrays.equals(book.authors, authors) && book.price == price && book.qty == qty;
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(getName(), getPrice(), getQty());
-        result = 31 * result + Arrays.hashCode(authors);
+        int result = 17;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + authors.hashCode();
+        result = 31 * result + (int) (Double.doubleToLongBits(price) ^ (Double.doubleToLongBits(price) >>> 32));
+        result = 31 * result + qty;
         return result;
     }
 }

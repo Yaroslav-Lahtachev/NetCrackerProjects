@@ -1,5 +1,4 @@
 import java.lang.*;
-import java.util.Objects;
 
 public class Circle {
     private double radius = 1.0;
@@ -50,12 +49,14 @@ public class Circle {
         if (this == o) return true;
         if (!(o instanceof Circle)) return false;
         Circle circle = (Circle) o;
-        return Double.compare(circle.getRadius(), getRadius()) == 0 &&
-                Objects.equals(getColor(), circle.getColor());
+        return circle.color.equals(color) && circle.radius == radius;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getRadius(), getColor());
+        int result = 17;
+        result = 31 * result + color.hashCode();
+        result = 31 * result + (int) (Double.doubleToLongBits(radius) ^ (Double.doubleToLongBits(radius) >>> 32));
+        return result;
     }
 }

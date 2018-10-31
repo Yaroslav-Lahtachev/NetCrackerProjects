@@ -1,5 +1,4 @@
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class MyComplex {
     private double real = 0.0;
@@ -125,12 +124,14 @@ public class MyComplex {
         if (this == o) return true;
         if (!(o instanceof MyComplex)) return false;
         MyComplex myComplex = (MyComplex) o;
-        return Double.compare(myComplex.getReal(), getReal()) == 0 &&
-                Double.compare(myComplex.getImag(), getImag()) == 0;
+        return myComplex.real == real && myComplex.imag == imag;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(isReal(), getImag());
+        int result = 17;
+        result = 31 * result + (int) (Double.doubleToLongBits(real) ^ (Double.doubleToLongBits(real) >>> 32));
+        result = 31 * result + (int) (Double.doubleToLongBits(imag) ^ (Double.doubleToLongBits(imag) >>> 32));
+        return result;
     }
 }

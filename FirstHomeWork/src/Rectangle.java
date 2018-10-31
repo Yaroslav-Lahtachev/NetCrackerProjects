@@ -1,4 +1,3 @@
-import java.util.Objects;
 
 public class Rectangle {
     private float length = 1.0f;
@@ -49,12 +48,15 @@ public class Rectangle {
         if (this == o) return true;
         if (!(o instanceof Rectangle)) return false;
         Rectangle rectangle = (Rectangle) o;
-        return Float.compare(rectangle.getLength(), getLength()) == 0 &&
-                Float.compare(rectangle.getWidth(), getWidth()) == 0;
+        return (rectangle.length == length && rectangle.width == rectangle.width) ||
+                (rectangle.length == width && rectangle.width == rectangle.length);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getLength(), getWidth());
+        int result = 17;
+        result = 31 * result + Float.floatToIntBits(length);
+        result = 31 * result + Float.floatToIntBits(width);
+        return result;
     }
 }

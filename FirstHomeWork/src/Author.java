@@ -1,4 +1,3 @@
-import java.util.Objects;
 
 public class Author {
     private String name;
@@ -37,13 +36,15 @@ public class Author {
         if (this == o) return true;
         if (!(o instanceof Author)) return false;
         Author author = (Author) o;
-        return getGender() == author.getGender() &&
-                Objects.equals(getName(), author.getName()) &&
-                Objects.equals(getEmail(), author.getEmail());
+        return author.name.equals(name) && author.email.equals(email) && author.gender == gender;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getEmail(), getGender());
+        int result = 17;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + gender;
+        return result;
     }
 }

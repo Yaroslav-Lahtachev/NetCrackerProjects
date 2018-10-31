@@ -1,4 +1,3 @@
-import java.util.Objects;
 
 public class Employee {
 
@@ -61,14 +60,16 @@ public class Employee {
         if (this == o) return true;
         if (!(o instanceof Employee)) return false;
         Employee employee = (Employee) o;
-        return getId() == employee.getId() &&
-                getSalary() == employee.getSalary() &&
-                Objects.equals(getFirstName(), employee.getFirstName()) &&
-                Objects.equals(getLastName(), employee.getLastName());
+        return employee.id == id && employee.firstName.equals(firstName) && employee.lastName.equals(lastName) && employee.salary == salary;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getSalary());
+        int result = 17;
+        result = 31 * result + id;
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + id;
+        return result;
     }
 }

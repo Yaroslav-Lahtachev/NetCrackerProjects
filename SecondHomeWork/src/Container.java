@@ -1,4 +1,3 @@
-import java.util.Objects;
 
 public class Container {
     private int x1;
@@ -57,6 +56,12 @@ public class Container {
 
     @Override
     public int hashCode() {
-        return Objects.hash(x1, y1, x2, y2);
+        int result = 17;
+        result = 31 * result + x1;
+        result = 31 * result + x2;
+        result = 31 * result + y1;
+        result = 31 * result + y2;
+        return result;
+
     }
 }

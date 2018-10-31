@@ -1,4 +1,3 @@
-import java.util.Objects;
 
 public class Ball {
     private float x;
@@ -79,15 +78,17 @@ public class Ball {
         if (this == o) return true;
         if (!(o instanceof Ball)) return false;
         Ball ball = (Ball) o;
-        return Float.compare(ball.getX(), getX()) == 0 &&
-                Float.compare(ball.getY(), getY()) == 0 &&
-                getRadius() == ball.getRadius() &&
-                Float.compare(ball.getxDelta(), getxDelta()) == 0 &&
-                Float.compare(ball.getyDelta(), getyDelta()) == 0;
+        return ball.x == x && ball.y == y && ball.radius == radius && ball.xDelta == xDelta && ball.yDelta == yDelta;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getX(), getY(), getRadius(), getxDelta(), getyDelta());
+        int result = 17;
+        result = 31 * result + Float.floatToIntBits(x);
+        result = 31 * result + Float.floatToIntBits(y);
+        result = 31 * result + radius;
+        result = 31 * result + Float.floatToIntBits(xDelta);
+        result = 31 * result + Float.floatToIntBits(xDelta);
+        return result;
     }
 }

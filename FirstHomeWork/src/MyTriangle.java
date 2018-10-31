@@ -1,5 +1,4 @@
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class MyTriangle {
     private MyPoint v1;
@@ -40,18 +39,21 @@ public class MyTriangle {
         a = a.setScale(5, BigDecimal.ROUND_HALF_EVEN);
         b = b.setScale(5, BigDecimal.ROUND_HALF_EVEN);
         c = c.setScale(5, BigDecimal.ROUND_HALF_EVEN);
+        if ((a.doubleValue() + b.doubleValue()) > c.doubleValue() && (a.doubleValue() + c.doubleValue()) > b.doubleValue() && (b.doubleValue() + c.doubleValue()) > a.doubleValue()) {
 
-        if (a.doubleValue() == b.doubleValue() && a.doubleValue() == c.doubleValue()) {
-            return "Равносторонний";
-        } else if (a.doubleValue() == b.doubleValue() || b.doubleValue() == c.doubleValue() || a.doubleValue() == c.doubleValue()) {
-            return "Равнобедренный";
+            if (a.doubleValue() == b.doubleValue() && a.doubleValue() == c.doubleValue()) {
+                return "Равносторонний";
+            } else if (a.doubleValue() == b.doubleValue() || b.doubleValue() == c.doubleValue() || a.doubleValue() == c.doubleValue()) {
+                return "Равнобедренный";
+            }
+
+            return "Разносторонний";
         }
-        return "Разносторонний";
+        return "Не является треугольником";
     }
 
     public String getTypeAngle() {
-        String str = "Не является треугольником";
-       
+
         double max, min1, min2;
         BigDecimal a = new BigDecimal(Math.pow(v1.distance(v2), 2));
         BigDecimal b = new BigDecimal(Math.pow(v2.distance(v3), 2));
@@ -75,12 +77,12 @@ public class MyTriangle {
                 min2 = b.doubleValue();
             }
             if (max == min1 + min2)
-                str = "Прямоугольный";
+                return "Прямоугольный";
             else if (max < min1 + min2)
-                str = "Остроугольный";
-            else str = "Тупоугольный";
+                return "Остроугольный";
+            else return "Тупоугольный";
         }
-        return str;
+        return "Не является треугольником";
     }
 
     @Override
@@ -88,13 +90,20 @@ public class MyTriangle {
         if (this == o) return true;
         if (!(o instanceof MyTriangle)) return false;
         MyTriangle that = (MyTriangle) o;
-        return Objects.equals(v1, that.v1) &&
-                Objects.equals(v2, that.v2) &&
-                Objects.equals(v3, that.v3);
+        return (that.v1.equals(v1) && that.v2.equals(v2) && that.v3.equals(v3)) ||
+                (that.v1.equals(v1) && that.v2.equals(v3) && that.v3.equals(v2)) ||
+                (that.v1.equals(v2) && that.v2.equals(v1) && that.v3.equals(v3)) ||
+                (that.v1.equals(v2) && that.v2.equals(v3) && that.v3.equals(v1)) ||
+                (that.v1.equals(v3) && that.v2.equals(v2) && that.v3.equals(v1)) ||
+                (that.v1.equals(v3) && that.v2.equals(v1) && that.v3.equals(v2));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(v1, v2, v3);
+        int result = 17;
+        result = 31 * result + v1.hashCode();
+        result = 31 * result + v2.hashCode();
+        result = 31 * result + v3.hashCode();
+        return result;
     }
 }
