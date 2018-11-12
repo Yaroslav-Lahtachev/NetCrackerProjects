@@ -196,25 +196,25 @@ public class CollectionAnalysis {
         System.out.println();
 
         HashMap hashMap = new HashMap();
-        LinkedHashMap linkedHashMap= new LinkedHashMap();
+        LinkedHashMap linkedHashMap = new LinkedHashMap();
         TreeMap treeMap = new TreeMap();
 
 
         for (int i = 0; i < size; i++) {
-            rndNum = (int) (Math.random() * size+1);
+            rndNum = (int) (Math.random() * size + 1);
 
             startTime1 = System.nanoTime();
-            hashMap.put(rndNum,i);
+            hashMap.put(rndNum, i);
             estimatedTime1 += System.nanoTime() - startTime1;
 
 
             startTime2 = System.nanoTime();
-            linkedHashMap.put(rndNum,i);
+            linkedHashMap.put(rndNum, i);
             estimatedTime2 += System.nanoTime() - startTime2;
 
 
             startTime3 = System.nanoTime();
-            treeMap.put(rndNum,i);
+            treeMap.put(rndNum, i);
             estimatedTime3 += System.nanoTime() - startTime3;
 
         }
@@ -242,33 +242,33 @@ public class CollectionAnalysis {
 
 
         startTime1 = System.nanoTime();
-        hashMap.remove(hashMap.size()/2);
+        hashMap.remove(hashMap.size() / 2);
         estimatedTime1 = System.nanoTime() - startTime1;
         System.out.println("удаление элемента в середине hashMap: " + estimatedTime1);
 
         startTime2 = System.nanoTime();
-        linkedHashMap.remove(hashMap.size()/2);
+        linkedHashMap.remove(hashMap.size() / 2);
         estimatedTime2 = System.nanoTime() - startTime2;
         System.out.println("удаление элемента в середине linkedHashMap: " + estimatedTime2);
 
         startTime3 = System.nanoTime();
-        treeMap.remove(hashMap.size()/2);
+        treeMap.remove(hashMap.size() / 2);
         estimatedTime3 = System.nanoTime() - startTime3;
         System.out.println("удаление элемента в середине treeMap: " + estimatedTime3);
 
 
         startTime1 = System.nanoTime();
-        hashMap.remove(size-1);
+        hashMap.remove(size - 1);
         estimatedTime1 = System.nanoTime() - startTime1;
         System.out.println("удаление элемента в конце hashMap: " + estimatedTime1);
 
         startTime2 = System.nanoTime();
-        linkedHashMap.remove(size-1);
+        linkedHashMap.remove(size - 1);
         estimatedTime2 = System.nanoTime() - startTime2;
         System.out.println("удаление элемента в конце linkedHashMap: " + estimatedTime2);
 
         startTime3 = System.nanoTime();
-        treeMap.remove(size-1);
+        treeMap.remove(size - 1);
         estimatedTime3 = System.nanoTime() - startTime3;
         System.out.println("удаление элемента в конце treeMap: " + estimatedTime3);
 

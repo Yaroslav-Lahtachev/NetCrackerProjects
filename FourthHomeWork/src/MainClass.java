@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class MainClass {
     public static void main(String[] args) {
-        int size = 100000;
+        int size = 10000;
 
         MyLinkedList<Integer> myLinkedList = new MyLinkedList<>(Integer.class);
         LinkedList<Integer> linkedList = new LinkedList<>();
@@ -136,23 +136,22 @@ public class MainClass {
         System.out.println("удаление элемента в конце linkedList: " + estimatedTime2);
 
 
-
         //ПРОТЕТСТИМ ОСНОВНЫЕ МЕТОДЫ
         MyLinkedList<Integer> listForTest = new MyLinkedList(Integer.class);
         listForTest.add(1);
         listForTest.add(2);
         listForTest.add(3);
         System.out.println(listForTest.toString());
-        listForTest.add(1,10);
+        listForTest.add(1, 10);
         System.out.println(listForTest.toString());
-        System.out.println("значение под индексом 1: "+listForTest.get(1));
-        System.out.println("значение 10 хранится под индексом: "+listForTest.indexOf(10));
-        System.out.println("удалили значение по индексом 1: "+listForTest.remove(1));
+        System.out.println("значение под индексом 1: " + listForTest.get(1));
+        System.out.println("значение 10 хранится под индексом: " + listForTest.indexOf(10));
+        System.out.println("удалили значение по индексом 1: " + listForTest.remove(1));
         System.out.println(listForTest.toString());
-        System.out.println("изменили значение под индексом 1 на "+listForTest.set(1,99));
+        System.out.println("изменили значение под индексом 1 на " + listForTest.set(1, 99));
         System.out.println(listForTest.toString());
-        System.out.println("размер list: "+listForTest.size());
-        System.out.println("записали list в ArrayList: "+Arrays.toString(listForTest.toArray()));
+        System.out.println("размер list: " + listForTest.size());
+        System.out.println("записали list в ArrayList: " + Arrays.toString(listForTest.toArray()));
 
         System.out.println();
         //тест итератора
@@ -162,7 +161,6 @@ public class MainClass {
             System.out.println(itr.next());
         }
         System.out.println();
-
 
 
     }

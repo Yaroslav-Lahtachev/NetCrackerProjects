@@ -1,4 +1,4 @@
-public interface ILinkedList<E> extends Iterable{
+public interface ILinkedList<E> extends Iterable {
 
     public void add(E element);
 

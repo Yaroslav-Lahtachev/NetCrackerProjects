@@ -13,7 +13,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     }
 
     public void add(E element) {
-        add(this.size, element);
+        add(this.size(), element);
     }
 
     public void add(int index, E element) {
@@ -54,8 +54,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
                 i++;
             }
             return (E) currentNode.getElement();
-        }
-        else System.out.println("out of index");
+        } else System.out.println("out of index");
         return null;
     }
 
