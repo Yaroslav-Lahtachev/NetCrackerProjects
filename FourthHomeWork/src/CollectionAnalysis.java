@@ -10,235 +10,129 @@ public class CollectionAnalysis {
     static LinkedHashMap linkedHashMap = new LinkedHashMap();
     static TreeMap treeMap = new TreeMap();
 
-    public static void testCreatingCollections(Collection collection1, Collection collection2, Collection collection3, int size) {
-        long startTime1, startTime2, startTime3, estimatedTime1 = 0, estimatedTime2 = 0, estimatedTime3 = 0;
-        for (int i = 0; i < size; i++) {
-            startTime1 = System.nanoTime();
-            collection1.add(i);
-            estimatedTime1 += System.nanoTime() - startTime1;
+    public static void testCreatingCollections(Collection[] collections, int size) {
 
-            startTime2 = System.nanoTime();
-            collection2.add(i);
-            estimatedTime2 += System.nanoTime() - startTime2;
+        Long[] estimatedTime = new Long[3];
+        for (int i = 0; i < 3; i++) {
+            estimatedTime[i] = (long) 0;
+        }
+        long startTime;
 
-            if (collection3 != null) {
-                startTime3 = System.nanoTime();
-                collection3.add(i);
-                estimatedTime3 += System.nanoTime() - startTime3;
+        if (collections[2] != null) {
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < 3; j++) {
+                    startTime = System.nanoTime();
+                    collections[j].add(i);
+                    estimatedTime[j] += System.nanoTime() - startTime;
+                }
+            }
+            for (int i = 0; i < 3; i++)
+                System.out.println("создание " + collections[i].getClass() + " на " + size + " элементов: " + estimatedTime[i]);
+        } else {
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < 2; j++) {
+                    startTime = System.nanoTime();
+                    collections[j].add(i);
+                    estimatedTime[j] += System.nanoTime() - startTime;
+                }
+            }
+            for (int i = 0; i < 2; i++)
+                System.out.println("создание " + collections[i].getClass() + " на " + size + " элементов: " + estimatedTime[i]);
+        }
+    }
+
+
+    public static void testAdditionLists(ArrayList arrayList, LinkedList linkedList, int size) {
+        List[] lists = new List[2];
+        lists[0] = arrayList;
+        lists[1] = linkedList;
+        long startTime, estimatedTime;
+        Integer[] nums = {0, size / 2, size - 1};
+
+        for (List list : lists) {
+            for (int i : nums) {
+                startTime = System.nanoTime();
+                list.add(i, -1);
+                estimatedTime = System.nanoTime() - startTime;
+                System.out.println("вставка элемента в " + i + " " + lists.getClass() + ": " + estimatedTime);
             }
         }
-        System.out.println("создание " + collection1.getClass() + " на " + size + " элементов: " + estimatedTime1);
-        System.out.println("создание " + collection2.getClass() + " на " + size + " элементов: " + estimatedTime2);
-        if (collection3 != null)
-            System.out.println("создание " + collection3.getClass() + " на " + size + " элементов: " + estimatedTime3);
     }
 
-    public static void testAdditionLists(ArrayList arrayList, LinkedList linkedList) {
-        long startTime1 = System.nanoTime();
-        arrayList.add(0, -1);
-        long estimatedTime1 = System.nanoTime() - startTime1;
-        System.out.println("вставка элемента в начало arrayList: " + estimatedTime1);
-
-        long startTime2 = System.nanoTime();
-        linkedList.add(0, -1);
-        long estimatedTime2 = System.nanoTime() - startTime2;
-        System.out.println("вставка элемента в начало linkedList: " + estimatedTime2);
-
-        startTime1 = System.nanoTime();
-        arrayList.add(-1);
-        estimatedTime1 = System.nanoTime() - startTime1;
-        System.out.println("вставка элемента в конец arrayList: " + estimatedTime1);
-
-        startTime2 = System.nanoTime();
-        linkedList.add(-1);
-        estimatedTime2 = System.nanoTime() - startTime2;
-        System.out.println("вставка элемента в конец linkedList: " + estimatedTime2);
-
-        startTime1 = System.nanoTime();
-        arrayList.add(arrayList.size() / 2, -1);
-        estimatedTime1 = System.nanoTime() - startTime1;
-        System.out.println("вставка элемента в середину arrayList: " + estimatedTime1);
-
-        startTime2 = System.nanoTime();
-        linkedList.add(arrayList.size() / 2, -1);
-        estimatedTime2 = System.nanoTime() - startTime2;
-        System.out.println("вставка элемента в середину linkedList: " + estimatedTime2);
-    }
-
-    public static void testDeletingFromLists(ArrayList arrayList, LinkedList linkedList, int size) {
-        long startTime1 = System.nanoTime();
-        arrayList.remove(0);
-        long estimatedTime1 = System.nanoTime() - startTime1;
-        System.out.println("удаление элемента в начале arrayList: " + estimatedTime1);
-
-        long startTime2 = System.nanoTime();
-        linkedList.remove(0);
-        long estimatedTime2 = System.nanoTime() - startTime2;
-        System.out.println("удаление элемента в начале linkedList: " + estimatedTime2);
-
-        startTime1 = System.nanoTime();
-        arrayList.remove(linkedList.size() / 2);
-        estimatedTime1 = System.nanoTime() - startTime1;
-        System.out.println("удаление элемента в середине arrayList: " + estimatedTime1);
-
-        startTime2 = System.nanoTime();
-        linkedList.remove(linkedList.size() / 2);
-        estimatedTime2 = System.nanoTime() - startTime2;
-        System.out.println("удаление элемента в середине linkedList: " + estimatedTime2);
-
-        startTime1 = System.nanoTime();
-        arrayList.remove(size - 1);
-        estimatedTime1 = System.nanoTime() - startTime1;
-        System.out.println("удаление элемента в конце arrayList: " + estimatedTime1);
-
-        startTime2 = System.nanoTime();
-        linkedList.remove(size - 1);
-        estimatedTime2 = System.nanoTime() - startTime2;
-        System.out.println("удаление элемента в конце linkedList: " + estimatedTime2);
+    public static void testDeletingFromCollections(Collection[] collections, int size) {
+        long startTime, estimatedTime;
+        Integer[] nums = {0, size / 2, size - 1};
+        if (collections[2] != null) {
+            for (Collection collection : collections) {
+                for (int i : nums) {
+                    startTime = System.nanoTime();
+                    collection.remove(i);
+                    estimatedTime = System.nanoTime() - startTime;
+                    System.out.println("удаление элемента из   " + i + " " + collection.getClass() + ": " + estimatedTime);
+                }
+            }
+        } else for (int i = 0; i < 2; i++) {
+            startTime = System.nanoTime();
+            collections[i].remove(i);
+            estimatedTime = System.nanoTime() - startTime;
+            System.out.println("удаление элемента из " + i + " " + collections[i].getClass() + ": " + estimatedTime);
+        }
 
     }
 
-    public static void testDeletingFromSet(HashSet hashSet, LinkedHashSet linkedHashSet, TreeSet treeSet, int size) {
-        long startTime1 = System.nanoTime();
-        hashSet.remove(0);
-        long estimatedTime1 = System.nanoTime() - startTime1;
-        System.out.println("удаление элемента в начале hashSet: " + estimatedTime1);
+    public static void testCreatingMap(Map[] maps, int size) {
 
-        long startTime2 = System.nanoTime();
-        linkedHashSet.remove(0);
-        long estimatedTime2 = System.nanoTime() - startTime2;
-        System.out.println("удаление элемента в начале linkedHashSet: " + estimatedTime2);
-
-        long startTime3 = System.nanoTime();
-        treeSet.remove(0);
-        long estimatedTime3 = System.nanoTime() - startTime3;
-        System.out.println("удаление элемента в начале treeSet: " + estimatedTime3);
-
-
-        startTime1 = System.nanoTime();
-        hashSet.remove(size / 2);
-        estimatedTime1 = System.nanoTime() - startTime1;
-        System.out.println("удаление элемента в середине hashSet: " + estimatedTime1);
-
-        startTime2 = System.nanoTime();
-        linkedHashSet.remove(size / 2);
-        estimatedTime2 = System.nanoTime() - startTime2;
-        System.out.println("удаление элемента в середине linkedHashSet: " + estimatedTime2);
-
-        startTime3 = System.nanoTime();
-        treeSet.remove(size / 2);
-        estimatedTime3 = System.nanoTime() - startTime3;
-        System.out.println("удаление элемента в середине treeSet: " + estimatedTime3);
-
-
-        startTime1 = System.nanoTime();
-        hashSet.remove(size - 1);
-        estimatedTime1 = System.nanoTime() - startTime1;
-        System.out.println("удаление элемента в конце hashSet: " + estimatedTime1);
-
-        startTime2 = System.nanoTime();
-        linkedHashSet.remove(size - 1);
-        estimatedTime2 = System.nanoTime() - startTime2;
-        System.out.println("удаление элемента в конце linkedHashSet: " + estimatedTime2);
-
-        startTime3 = System.nanoTime();
-        treeSet.remove(size - 1);
-        estimatedTime3 = System.nanoTime() - startTime3;
-        System.out.println("удаление элемента в конце treeSet: " + estimatedTime3);
-    }
-
-    public static void testCreatingMap(HashMap hashMap, LinkedHashMap linkedHashMap, TreeMap treeMap, int size) {
+        Long[] estimatedTime = new Long[3];
         int rndNum;
-        long startTime1, startTime2, startTime3, estimatedTime1 = 0, estimatedTime2 = 0, estimatedTime3 = 0;
-
+        for (int i = 0; i < 3; i++) {
+            estimatedTime[i] = (long) 0;
+        }
+        long startTime;
         for (int i = 0; i < size; i++) {
             rndNum = (int) (Math.random() * size + 1);
-
-            startTime1 = System.nanoTime();
-            hashMap.put(rndNum, i);
-            estimatedTime1 += System.nanoTime() - startTime1;
-
-
-            startTime2 = System.nanoTime();
-            linkedHashMap.put(rndNum, i);
-            estimatedTime2 += System.nanoTime() - startTime2;
-
-
-            startTime3 = System.nanoTime();
-            treeMap.put(rndNum, i);
-            estimatedTime3 += System.nanoTime() - startTime3;
-
+            for (int j = 0; j < 3; j++) {
+                startTime = System.nanoTime();
+                maps[j].put(rndNum, i);
+                estimatedTime[j] += System.nanoTime() - startTime;
+            }
         }
-        System.out.println("создание hashMap на " + size + " элементов: " + estimatedTime1);
-        System.out.println("создание linkedHashMap на " + size + " элементов: " + estimatedTime2);
-        System.out.println("создание treeMap на " + size + " элементов: " + estimatedTime3);
+        for (int i = 0; i < 3; i++)
+            System.out.println("создание " + maps[i].getClass() + " на " + size + " элементов: " + estimatedTime[i]);
     }
 
-    public static void testDeletingFromMap(HashMap hashMap, LinkedHashMap linkedHashMap, TreeMap treeMap, int size) {
-        long startTime1 = System.nanoTime();
-        hashMap.remove(0);
-        long estimatedTime1 = System.nanoTime() - startTime1;
-        System.out.println("удаление элемента в начале hashMap: " + estimatedTime1);
 
-        long startTime2 = System.nanoTime();
-        linkedHashMap.remove(0);
-        long estimatedTime2 = System.nanoTime() - startTime2;
-        System.out.println("удаление элемента в начале linkedHashMap: " + estimatedTime2);
-
-        long startTime3 = System.nanoTime();
-        treeMap.remove(0);
-        long estimatedTime3 = System.nanoTime() - startTime3;
-        System.out.println("удаление элемента в начале treeMap: " + estimatedTime3);
-
-
-        startTime1 = System.nanoTime();
-        hashMap.remove(hashMap.size() / 2);
-        estimatedTime1 = System.nanoTime() - startTime1;
-        System.out.println("удаление элемента в середине hashMap: " + estimatedTime1);
-
-        startTime2 = System.nanoTime();
-        linkedHashMap.remove(hashMap.size() / 2);
-        estimatedTime2 = System.nanoTime() - startTime2;
-        System.out.println("удаление элемента в середине linkedHashMap: " + estimatedTime2);
-
-        startTime3 = System.nanoTime();
-        treeMap.remove(hashMap.size() / 2);
-        estimatedTime3 = System.nanoTime() - startTime3;
-        System.out.println("удаление элемента в середине treeMap: " + estimatedTime3);
-
-
-        startTime1 = System.nanoTime();
-        hashMap.remove(size - 1);
-        estimatedTime1 = System.nanoTime() - startTime1;
-        System.out.println("удаление элемента в конце hashMap: " + estimatedTime1);
-
-        startTime2 = System.nanoTime();
-        linkedHashMap.remove(size - 1);
-        estimatedTime2 = System.nanoTime() - startTime2;
-        System.out.println("удаление элемента в конце linkedHashMap: " + estimatedTime2);
-
-        startTime3 = System.nanoTime();
-        treeMap.remove(size - 1);
-        estimatedTime3 = System.nanoTime() - startTime3;
-        System.out.println("удаление элемента в конце treeMap: " + estimatedTime3);
-
+    public static void testDeletingFromMaps(Map[] maps, int size) {
+        long startTime, estimatedTime;
+        Integer[] nums = {0, size / 2, size - 1};
+        for (Map map : maps)
+            for (int i : nums) {
+                startTime = System.nanoTime();
+                map.remove(i);
+                estimatedTime = System.nanoTime() - startTime;
+                System.out.println("удаление элемента из  " + i + " " + map.getClass() + ": " + estimatedTime);
+            }
     }
 
 
     public static void main(String[] args) {
         int size = 100000;
 
-        testCreatingCollections(arrayList, linkedList, null, size);
+        Collection[] collectionLists = new Collection[3];
+        collectionLists[0] = arrayList;
+        collectionLists[1] = linkedList;
+        collectionLists[2] = null;
+
+        testCreatingCollections(collectionLists, size);
 
         //Заполнение ArrayList и LinkedList путем последовательного добавления элементов в коллекцию длится приблезительно одинаковое время
         //Немного большее время создание у ArrayList'а связано с не обходимостью динамически расширять массив хранящий данные
 
-        testAdditionLists(arrayList, linkedList);
+        testAdditionLists(arrayList, linkedList, size);
 
         //Исходя из особенности реализации LinkedList вставка элемента в начало и конец списка занимает меньшее время
         //Однако вставка в середину LinkedList занимает значительно большее время
 
-        testDeletingFromLists(arrayList, linkedList, size);
+        testDeletingFromCollections(collectionLists, size);
 
         //Удаление элемнта в начале списка значительно быстрее LinkedList, удаление с конца занимает примерно одинаковое время
         //Удаление же из середины LinkedList, снова значительно проигрывает ArrayList'у
@@ -251,11 +145,16 @@ public class CollectionAnalysis {
         System.out.println();
         System.out.println();
 
-        testCreatingCollections(hashSet, linkedHashSet, treeSet, size);
+        Collection[] collectionSets = new Collection[3];
+        collectionSets[0] = hashSet;
+        collectionSets[1] = linkedHashSet;
+        collectionSets[2] = treeSet;
+
+        testCreatingCollections(collectionSets, size);
 
         //очевидно, стандартный HashSet получился самым быстрым в плане добавления элеменитов, следом за нима LinkedHashSet и последний TreeSet
 
-        testDeletingFromSet(hashSet, linkedHashSet, treeSet, size);
+        testDeletingFromCollections(collectionSets, size);
 
         //самым же быстрым на удаление получился LinkedHashSet, вслед за которым идет HashSet. Самым же неспешным оказался TreeSet
         //Эти результаты оказалиль предсказуемы, т.к. TreeSet следует использовать только в задачах связанных с поиском, временная сложность
@@ -267,11 +166,17 @@ public class CollectionAnalysis {
         System.out.println();
         System.out.println();
 
-        testCreatingMap(hashMap, linkedHashMap, treeMap, size);
+        Map[] maps = new Map[3];
+        maps[0] = hashMap;
+        maps[1] = linkedHashMap;
+        maps[2] = treeMap;
+
+
+        testCreatingMap(maps, size);
 
         //Заполнение LinkedHashMap происходит немного быстрее обычного HashMap, а вот TreeMap значительно остстает от лидеров
 
-        testDeletingFromMap(hashMap, linkedHashMap, treeMap, size);
+        testDeletingFromMaps(maps, size);
 
         //Ситуация у карт такая же как и в множемтвах. LinkedHashMap производительнее двух других коллекций. Этот класс будет предпочтительнее
         //во всех случаях, где память не играет никакой роли и где нам не нужно упорядоченное хранение элементов.
