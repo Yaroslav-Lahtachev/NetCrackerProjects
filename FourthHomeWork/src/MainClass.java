@@ -4,12 +4,11 @@ import java.util.LinkedList;
 
 
 public class MainClass {
-    public static void main(String[] args) {
-        int size = 10000;
 
-        MyLinkedList<Integer> myLinkedList = new MyLinkedList<>(Integer.class);
-        LinkedList<Integer> linkedList = new LinkedList<>();
+    static MyLinkedList<Integer> myLinkedList = new MyLinkedList<>(Integer.class);
+    static LinkedList<Integer> linkedList = new LinkedList<>();
 
+    public static void testMyLinkedListCreating(MyLinkedList myLinkedList, int size) {
         //создание myLinkedList на величину size элементов
         long startTime1 = System.nanoTime();
         for (int i = 0; i < size; i++) {
@@ -17,7 +16,9 @@ public class MainClass {
         }
         long estimatedTime1 = System.nanoTime() - startTime1;
         System.out.println("создание myLinkedList на " + size + " элементов: " + estimatedTime1);
+    }
 
+    public static void testLinkedListCreating(LinkedList linkedList, int size) {
         //создание linkedList на величину size элементов
         long startTime2 = System.nanoTime();
         for (int i = 0; i < size; i++) {
@@ -25,17 +26,19 @@ public class MainClass {
         }
         long estimatedTime2 = System.nanoTime() - startTime2;
         System.out.println("создание linkedList на " + size + " элементов: " + estimatedTime2);
+    }
 
+    public static void testAdditionInLists(MyLinkedList myLinkedList, LinkedList linkedList) {
         //вставка элемента в начало myLinkedList
-        startTime1 = System.nanoTime();
+        long startTime1 = System.nanoTime();
         myLinkedList.add(0, -1);
-        estimatedTime1 = System.nanoTime() - startTime1;
+        long estimatedTime1 = System.nanoTime() - startTime1;
         System.out.println("вставка элемента в начало myLinkedList: " + estimatedTime1);
 
         //вставка элемента в начало linkedList
-        startTime2 = System.nanoTime();
+        long startTime2 = System.nanoTime();
         linkedList.add(0, -1);
-        estimatedTime2 = System.nanoTime() - startTime2;
+        long estimatedTime2 = System.nanoTime() - startTime2;
         System.out.println("вставка элемента в начало linkedList: " + estimatedTime2);
 
         //вставка элемента в конец myLinkedList
@@ -61,17 +64,19 @@ public class MainClass {
         linkedList.add(myLinkedList.size() / 2, -1);
         estimatedTime2 = System.nanoTime() - startTime2;
         System.out.println("вставка элемента в середину linkedList: " + estimatedTime2);
+    }
 
+    public static void testSearchingInLists(MyLinkedList myLinkedList, LinkedList linkedList, int size) {
         //поиск элемента в середине myLinkedList
-        startTime1 = System.nanoTime();
+        long startTime1 = System.nanoTime();
         myLinkedList.get(linkedList.size() / 2);
-        estimatedTime1 = System.nanoTime() - startTime1;
+        long estimatedTime1 = System.nanoTime() - startTime1;
         System.out.println("поиск элемента в середине myLinkedList: " + estimatedTime1);
 
         //поиск элемента в середине linkedList
-        startTime2 = System.nanoTime();
+        long startTime2 = System.nanoTime();
         linkedList.get(linkedList.size() / 2);
-        estimatedTime2 = System.nanoTime() - startTime2;
+        long estimatedTime2 = System.nanoTime() - startTime2;
         System.out.println("поиск элемента в середине linkedList: " + estimatedTime2);
 
 
@@ -98,17 +103,19 @@ public class MainClass {
         linkedList.get(size - 1);
         estimatedTime2 = System.nanoTime() - startTime2;
         System.out.println("поиск элемента в конце linkedList: " + estimatedTime2);
+    }
 
+    public static void testDeletingFromLists(MyLinkedList myLinkedList, LinkedList linkedList, int size) {
         //удаление элемента в начале myLinkedList
-        startTime1 = System.nanoTime();
+        long startTime1 = System.nanoTime();
         myLinkedList.remove(0);
-        estimatedTime1 = System.nanoTime() - startTime1;
+        long estimatedTime1 = System.nanoTime() - startTime1;
         System.out.println("удаление элемента в начале myLinkedList: " + estimatedTime1);
 
         //удаление элемента в начале linkedList
-        startTime2 = System.nanoTime();
+        long startTime2 = System.nanoTime();
         linkedList.remove(0);
-        estimatedTime2 = System.nanoTime() - startTime2;
+        long estimatedTime2 = System.nanoTime() - startTime2;
         System.out.println("удаление элемента в начале linkedList: " + estimatedTime2);
 
         //удаление элемента в середине myLinkedList
@@ -134,8 +141,9 @@ public class MainClass {
         linkedList.remove(size - 1);
         estimatedTime2 = System.nanoTime() - startTime2;
         System.out.println("удаление элемента в конце linkedList: " + estimatedTime2);
+    }
 
-
+    public static void testMyLinkedListMethods() {
         //ПРОТЕТСТИМ ОСНОВНЫЕ МЕТОДЫ
         MyLinkedList<Integer> listForTest = new MyLinkedList(Integer.class);
         listForTest.add(1);
@@ -162,6 +170,24 @@ public class MainClass {
         }
         System.out.println();
 
+        for (Object str : listForTest) {
+            System.err.println(str);
+        }
 
+    }
+
+    public static void main(String[] args) {
+        int size = 10000;
+        testMyLinkedListCreating(myLinkedList, size);
+
+        testLinkedListCreating(linkedList, size);
+
+        testAdditionInLists(myLinkedList, linkedList);
+
+        testSearchingInLists(myLinkedList, linkedList, size);
+
+        testDeletingFromLists(myLinkedList, linkedList, size);
+
+        testMyLinkedListMethods();
     }
 }
