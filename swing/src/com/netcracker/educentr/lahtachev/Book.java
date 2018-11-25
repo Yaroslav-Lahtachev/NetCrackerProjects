@@ -19,6 +19,7 @@ public class Book {
         this.author = author;
     }
 
+
     public String getName() {
         return name;
     }
@@ -33,6 +34,14 @@ public class Book {
 
     public Author getAuthor() {
         return author;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public void setQty(int qty) {
