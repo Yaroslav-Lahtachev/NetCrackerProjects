@@ -1,0 +1,8 @@
+someBook1 Author1 email@ m 100,1 50
+someBook2 Author2 email2@ f 50,5 100
+someBook3 Author3 email3@ m 150,5 250
+someBook4 Author4 email4@ f 250,1 1000
+someBook5 Author5 email5@ m 350,5 500
+someBook6 Author6 email6@ m 450,80 270
+someBook7 Author7 email7@ m 159,99 310
+someBook8 Author8 email8@ m 130,33 5600
