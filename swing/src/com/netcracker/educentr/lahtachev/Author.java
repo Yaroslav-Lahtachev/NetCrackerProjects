@@ -13,6 +13,18 @@ public class Author {
         this.gender = gender;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
     @Override
     public String toString() {
         return name + " " + email + " " + gender;

@@ -35,7 +35,7 @@ public class BookModel extends AbstractTableModel {
             case 0:
                 return cur.getName();
             case 1:
-                return cur.getAuthor().toString();
+                return "Имя автора: " + cur.getAuthor().getName() + ", eMail: " + cur.getAuthor().getEmail() +", Гендер: "+ cur.getAuthor().getGender();
             case 2:
                 return cur.getPrice();
             case 3:
@@ -123,5 +123,9 @@ public class BookModel extends AbstractTableModel {
     public void removeBook(int idx) {
         books.remove(idx);
         fireTableDataChanged();
+    }
+
+    public boolean isEmpty(){
+        return this.books.isEmpty();
     }
 }
