@@ -1,0 +1,55 @@
+.calcTable {
+    margin: 15px auto auto;
+    border: 4px double black;
+    border-collapse: collapse;
+    border-spacing: 7px 11px;
+    width: 750px;
+    text-align: center;
+    color: black;
+}
+
+.calcTable tr:nth-child(odd) {
+    background: #C0C0C0;
+}
+
+.calcTable tr:nth-child(even) {
+    background: #A9A9A9;
+}
+
+.calcTable > * > tr > td {
+    padding: 2px;
+    border: 1px double black;
+}
+
+.calcBody {
+
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    background: #696969;
+    color: #DCDCDC;
+
+}
+
+.inputForm > input[type=text] {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    border-color: gray;
+    background-color: transparent;
+    text-align: center;
+    color: #DCDCDC;
+}
+
+.inputForm > input[type=button] {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    background-color: transparent;
+    border-color: gray;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#bright {
+    position: fixed;
+    left: 10%;
+    bottom: 0;
+}
