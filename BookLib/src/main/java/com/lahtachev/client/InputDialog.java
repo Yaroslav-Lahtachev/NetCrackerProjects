@@ -13,6 +13,7 @@ public class InputDialog extends DialogBox {
     private String title;
     private int pageNum;
     private int publishingYear;
+    private String[] lang = {"А-я"};
 
     private Button ok;
     private TextBox authorTextBox;
@@ -114,6 +115,24 @@ public class InputDialog extends DialogBox {
         this.opener = opener;
     }
 
+    private boolean checkNum(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) < '0' || str.charAt(i) > '9') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkString(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) < '0' || str.charAt(i) > '}') {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public class MyKeyUpHandler implements KeyUpHandler {
 
         @Override
@@ -133,24 +152,27 @@ public class InputDialog extends DialogBox {
                 ok.setEnabled(false);
                 publishingYearTextBox.removeStyleName("valid");
                 publishingYearTextBox.addStyleName("notvalid");
-                ;
             }
 
-            if (author != "") {
+            if ((author != "") && (checkString(author))) {
                 authorTextBox.addStyleName("valid");
             } else {
+                author = "";
+                authorTextBox.setText("");
                 ok.setEnabled(false);
                 authorTextBox.addStyleName("notvalid");
             }
 
-            if (title != "") {
+            if ((title != "") && (checkString(title))) {
                 titleTextBox.addStyleName("valid");
             } else {
+                title = "";
+                titleTextBox.setText("");
                 ok.setEnabled(false);
                 titleTextBox.addStyleName("notvalid");
             }
 
-            if (pageNum > -1) {
+            if (pageNum > -1 && checkNum(pageNumTextBox.getText())) {
                 pageNumTextBox.removeStyleName("notvalid");
                 pageNumTextBox.addStyleName("valid");
             } else {
@@ -159,7 +181,7 @@ public class InputDialog extends DialogBox {
                 pageNumTextBox.addStyleName("notvalid");
             }
 
-            if (publishingYear < 2019) {
+            if (publishingYear < 2019 && checkNum(publishingYearTextBox.getText())) {
                 publishingYearTextBox.removeStyleName("notvalid");
                 publishingYearTextBox.addStyleName("valid");
             } else {

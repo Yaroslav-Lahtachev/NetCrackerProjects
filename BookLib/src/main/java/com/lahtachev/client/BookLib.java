@@ -133,7 +133,7 @@ public class BookLib implements EntryPoint, DialogBoxOpener {
                                 }
 
                                 @Override
-                                public void onSuccess(Method method, BookPagination bookPagination1) {
+                                public void onSuccess(Method method, BookPagination bookPagination) {
                                     drawTable(bookPagination);
                                 }
                             });
