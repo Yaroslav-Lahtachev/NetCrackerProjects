@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="Fruit" class="com.lahtachev.objects.Fruit">
+        <constructor-arg value="#{T(com.lahtachev.objects.SimpleConfig).nameF}"/>
+        <constructor-arg value="#{T(com.lahtachev.objects.SimpleConfig).color}"/>
+        <constructor-arg value="#{T(com.lahtachev.objects.SimpleConfig).qty}"/>
+    </bean>
+</beans>
